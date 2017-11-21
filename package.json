@@ -1,0 +1,31 @@
+{
+  "name": "object-container",
+  "version": "0.1.0",
+  "description": "A simple javascript dependency injection container.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unicreators/object-container.git"
+  },
+  "keywords": [
+    "object",
+    "container",
+    "dependency injection"
+  ],
+  "author": "yichen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/unicreators/object-container/issues"
+  },
+  "homepage": "https://github.com/unicreators/object-container#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "^3.5.0"
+  }
+}
