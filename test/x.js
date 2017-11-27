@@ -1,0 +1,1 @@
+module.exports = class X { constructor(args1) { this.args1 = args1; } };
