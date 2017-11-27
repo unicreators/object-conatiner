@@ -2,6 +2,8 @@
 
 A simple javascript dependency injection container.
 
+&nbsp;
+&nbsp;
 
 ## Install
 
@@ -9,6 +11,8 @@ A simple javascript dependency injection container.
 $ npm install object-container
 ```
 
+&nbsp;
+&nbsp;
 
 ## Usage
 
@@ -20,9 +24,9 @@ let X = class X { constructor(args1) { this.args1 = args1; } };
 let Y = class Y { constructor(args1, x, val) { this.args1 = args1; this.x = x; this.val = val; } };
 
 let objectContainer = new ObjectContainer();
-objectContainer.registerType('x', X, 'testX');
-objectContainer.registerType('y', Y, 'testY', ref('x'), ref('z'));
-objectContainer.registerValue('z', 10);
+objectContainer.registerType('x', X, 'testX')
+    .registerType('y', Y, 'testY', ref('x'), ref('z'))
+    .registerValue('z', 10);
 
 let x = objectContainer.get('x');
 let y = objectContainer.get('y');
@@ -32,8 +36,11 @@ console.log(y.val == 10);
 
 ```
 
+&nbsp;
+&nbsp;
 
-## Api
+## Api  
+  
 
 - (constructor) new (...definitions: Definition[]) => ObjectContainer
 
@@ -47,8 +54,12 @@ console.log(y.val == 10);
 
 - (property) length: number
 
+  
+  
 
 
+&nbsp;
+&nbsp;
 
 ## Custom Definition
 
@@ -82,8 +93,8 @@ console.log(x.args1 === 'testX');
 
 ```
 
-
-
+&nbsp;
+&nbsp;
 
 ## Convert
 
@@ -110,6 +121,9 @@ console.log(definitions.every((d) => d instanceof Definition));
 //
 
 ```
+
+&nbsp;
+&nbsp;
 
 ### License
 
