@@ -40,22 +40,49 @@ console.log(y.val == 10);
 &nbsp;
 
 ## Api  
-  
 
-- (constructor) new (...definitions: Definition[]) => ObjectContainer
+&nbsp;
+
+### ObjectContainer
+
+- (constructor) new (...definitions: Definition[]): ObjectContainer
 
 - (method) register(...definitions: Definition[]): ObjectContainer
 - (method) registerType(name: string, type: class | function, ...args: any[]): ObjectContainer
 - (method) registerValue(name: string, value: any): ObjectContainer
-- (method) get(name: string, def?: any): any
+- (method) get(name: any, renew?: boolean, ...overrideArgs: any[]): any
 - (method) remove(name: string): void
 - (method) contains(name: string): boolean
 - (method) clear(): void
 
 - (property) length: number
 
-  
-  
+&nbsp;
+
+### Reference (ref)
+
+- (constructor) new (name: string, renew?: boolean, ...overrideArgs: any[]): Reference
+- (method) ref (name: string, renew?: boolean, ...overrideArgs: any[]): Reference
+
+&nbsp;
+
+### Definition (abstract)
+
+- (constructor) new (name: string): Definition
+- (abstract method) resolve(objectContainer: ObjectContainer): any
+
+&nbsp;
+
+### TypeDefinition (extends Definition)
+
+- (constructor) new (name: string, type: class | function, ...args: any[]): TypeDefinition
+
+&nbsp;
+
+
+### ValueDefinition (extends Definition)
+
+- (constructor) new (name: string, value: any): ValueDefinition
 
 
 &nbsp;

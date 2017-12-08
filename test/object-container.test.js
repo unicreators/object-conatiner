@@ -67,6 +67,54 @@ describe('object-container.test.js', function () {
 
     });
 
+    it('get (renew)', function () {
+
+        let objectContainer = new ObjectContainer();
+        objectContainer.registerValue('a', 10);
+        objectContainer.registerType('x',
+            class X { constructor(args1) { this.args1 = args1; } },
+            'testX');
+
+        let x = objectContainer.get('x');
+        let x1 = objectContainer.get('x', true);
+        assert(x !== x1);
+
+        let a = objectContainer.get('a');
+        let a1 = objectContainer.get('a', true);
+
+        assert(a === a1);
+
+    });
+
+    it('get (renew & overrideArgs)', function () {
+
+        let objectContainer = new ObjectContainer();
+        objectContainer.registerType('x',
+            class X {
+                constructor(args1, args2, args3) {
+                    this.args1 = args1; this.args2 = args2; this.args3 = args3;
+                }
+            }, 'testX1', 'testX2', 'testX3');
+
+        let x = objectContainer.get('x');
+        let x1 = objectContainer.get('x', true, 'overrideX1', 'overrideX2', 'overrideX3');
+
+        assert(x1 !== x);
+        assert(x1.args1 == 'overrideX1');
+        assert(x1.args2 == 'overrideX2');
+        assert(x1.args3 == 'overrideX3');
+
+        let x2 = objectContainer.get('x', false, 'overrideX1', 'overrideX2', 'overrideX3');
+        assert(x2 === x);
+
+        let x3 = objectContainer.get('x', true, 'overrideX1', undefined, null);
+        assert(x3 !== x);
+        assert(x3.args1 == 'overrideX1');
+        assert(x3.args2 == 'testX2');
+        assert(x3.args3 === null);
+
+    });
+
     it('remove', function () {
 
         let objectContainer = new ObjectContainer();
@@ -115,6 +163,24 @@ describe('object-container.test.js', function () {
 
         assert(y.x === x);
         assert(y.val == 10);
+
+    });
+
+    it('ref (renew & overrideArgs)', function () {
+
+        let objectContainer = new ObjectContainer();
+        objectContainer.registerType('x', X, 'testX');
+        objectContainer.registerType('y', Y, 'testY', ref('x', true, 'overrideX'), ref('z'));
+        objectContainer.registerValue('z', 10);
+        objectContainer.registerType('y1', Y, 'testY', ref('x'), ref('z'));
+
+        let x = objectContainer.get('x');
+        let y = objectContainer.get('y');
+        let y1 = objectContainer.get('y1');
+
+        assert(y.x !== x);
+        assert(y1.x === x);
+        assert(y.x.args1 == 'overrideX');
 
     });
 
